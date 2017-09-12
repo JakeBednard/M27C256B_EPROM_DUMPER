@@ -2,7 +2,7 @@
 // Wayne State Computer and Systems Security Lab
 // 2017-09-09
 //
-// M27C256B EPROM Extractor for RaspPi 3. This code will raid the all the memory
+// M27C256B EPROM Extractor for Raspberry Pi. This code will raid the all the memory
 // address on the EPROM chip, then dump them to binary file called "EPROM_DUMP.bin"
 // located within the execution directory.
 // 
@@ -30,13 +30,13 @@
 /* ------------------------------------ USER PARAMETERS ------------------------------------ */
 
 // Raspberry Pi GPIO Control Pins																		
-const int CHIP_ENABLE = 24;																// E
-const int OUTPUT_ENABLE = 23;															// G
-const int ADDRESS_PINS[] = { 5, 11, 9, 10, 22, 27, 17, 4, 15, 18, 8, 25, 3, 14, 2 };	// A0 -> A14
-const int READ_PINS[] = { 13, 19, 26, 21, 20, 16, 12, 6 };								// Q0 -> Q7
+const int CHIP_ENABLE = 24;                                                             // E
+const int OUTPUT_ENABLE = 23;                                                           // G
+const int ADDRESS_PINS[] = { 5, 11, 9, 10, 22, 27, 17, 4, 15, 18, 8, 25, 3, 14, 2 };    // A0 -> A14
+const int READ_PINS[] = { 13, 19, 26, 21, 20, 16, 12, 6 };                              // Q0 -> Q7
+const int DELAY = 1;                                                                    // Microseconds - Delay Length (If you're getting read errors, increase this).
 
-// Programmed Delays
-const int DELAY = 1;																	// Microseconds (If you're getting read errors, increase this).
+const int NUMBER_OF_ADDRESSES = 32768;                                                  // Total number of addresses (Fit accordingly for your needs.)
 
 /* --------------------------------------- EXECUTION --------------------------------------- */
 
@@ -48,11 +48,10 @@ const int DELAY = 1;																	// Microseconds (If you're getting read err
 using namespace std;
 
 // Chip Info ( M27C256B EPROM ) 
-const int NUMBER_OF_ADDRESSES = 32768;                                                  // Total number of addresses
-const int ADDRESS_WIDTH = 15;															// Bits
-const int DATA_WIDTH = 8;																// Bits
+const int ADDRESS_WIDTH = 15;                                                           // Bits
+const int DATA_WIDTH = 8;                                                               // Bits (DONT CHANGE, IT'LL BREAK)
 
-vector<char> byteArray(NUMBER_OF_ADDRESSES);											// Array to hold bytes prior to file write
+vector<char> byteArray(NUMBER_OF_ADDRESSES);                                            // Array to hold bytes prior to file write
 
 // Method Prototypes
 void setup();
@@ -74,7 +73,6 @@ int main() {
 	}
 
 	writeFile();
-
 	teardown();
 
 }
@@ -87,7 +85,7 @@ void setAddress(int address) {
 		digitalWrite(ADDRESS_PINS[offset], (address & (1 << offset)) >> offset);
 	}
 
-	delayMicroseconds(1);
+	delayMicroseconds(DELAY);
 
 }
 
@@ -105,7 +103,7 @@ void read(int address) {
 	
 	byteArray[address] = byte;
 
-	delayMicroseconds(1);
+	delayMicroseconds(DELAY);
 	
 	return;
 
