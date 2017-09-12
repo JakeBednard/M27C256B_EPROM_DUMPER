@@ -113,7 +113,7 @@ void writeFile() {
 
 	// Make the dump binary file with the read data.
 
-	ofstream outfile("/home/pi/EPROM_DUMP/EPROM_DUMP.bin", ios::out | ios::trunc | ios::binary);
+	ofstream outfile("EPROM_DUMP.bin", ios::out | ios::trunc | ios::binary);
 
 	for (int address = 0; address < NUMBER_OF_ADDRESSES; ++address) {
 		outfile.write(&byteArray[address], sizeof(char));
