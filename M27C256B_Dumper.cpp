@@ -2,7 +2,7 @@
 // Wayne State Computer and Systems Security Lab
 // 2017-09-09
 //
-// M27C256B EPROM Extractor for Raspberry Pi. This code will raid the all the memory
+// M27C256B EPROM Extractor for Raspberry Pi. This code will raid all the memory
 // address on the EPROM chip, then dump them to binary file called "EPROM_DUMP.bin"
 // located within the execution directory.
 // 
@@ -10,7 +10,7 @@
 //
 // The user parameter section below will let you set your GPIO pins accordingly for your
 // setup. Depending on endianess of address space and data-out, you may have to 
-// adjust accordingly. Also note that this is designed with the broadcom chipset 
+// adjust accordingly. Also note that this is designed with the Broadcom chipset 
 // in mind. You may have to edit the "wiringPiSetupGpio()" method in order to call
 // the right init. Consult the wiringPi documentation for this... simple enough.
 //
@@ -24,7 +24,7 @@
 // You can probabally quickly modify this code to work
 // with any parallel EPROM chip. Consult the chips documentation for further guidenance.
 //
-// NOTE: This programs not written for speed. Yes, I can dump a 32KB EPROM in 400ms, but thats
+// NOTE: This program is not written for speed. Yes, I can dump a 32KB EPROM in 400ms, but thats
 // actually pretty slow. For most reverse engineering, this shouldn't matter.
 
 /* ------------------------------------ USER PARAMETERS ------------------------------------ */
